@@ -7,15 +7,22 @@ Key sources:
 - [Link of the official documentation](https://docxtpl.readthedocs.io/en/latest/)  
 - [Source code](https://github.com/elapouya/python-docx-template)
 
-## How to use it
+## How to use it?
 
-1. Create a word document (a template)  
+### Installation
+
+1. Create a python virtual env  
+2. Install the dependencies
+
+### Running
+
+1. Create a Word document (a template)  
 2. Insert the Jinja2 tags to add dynamic content  
 3. Generate it from the python code with the commands described bellow
 
 ```bash
 # Enable python env
-.\venv\Scripts\activate
+.\env\Scripts\activate
 
 # Execute the script
 python .\script.py
