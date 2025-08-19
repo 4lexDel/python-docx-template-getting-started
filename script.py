@@ -1,7 +1,10 @@
-from docxtpl import DocxTemplate
+from docxtpl import DocxTemplate, InlineImage
+from docx.shared import Mm
+import jinja2
+
 
 # our template file containing the word content
-template = DocxTemplate("template.docx")
+template = DocxTemplate("template/template.docx")
 
 # Data
 context = {
@@ -38,12 +41,26 @@ context = {
         { "name": "Yara", "age": 31, "job": "Business Analysis", "gender": False },
         { "name": "Zane", "age": 28, "job": "Strategy", "gender": True }
     ],
-    "paragraphValue": "This is a paragraph that will be replaced in the template.",
     "version": "1.0",
+    "introduction": "This is an introduction to python-docx-template.",
+    "specificValue": "SPECIFIC_VALUE",
+    "sections": [
+        { "title": "First section", "subtitle": "First subtitle", "paragraph": "This is the first paragraph of my first section." },
+        { "title": "Second section", "subtitle": "Second subtitle", "paragraph": "This is the first paragraph of my second section." },
+        { "title": "Third section", "subtitle": "Third subtitle", "paragraph": "This is the first paragraph of my third section." },
+    ],
+    "dynamicImage": InlineImage(template, 'template/rte_logo.png', width=Mm(60), height=Mm(60))
 }
+
+
+# Replace img
+template.replace_pic('template_img.png','./template/schema_unifilaire.png')
+
+# testing that it works also when autoescape has been forced to True
+jinja_env = jinja2.Environment(autoescape=True)
 
 # Render the template with the context data
 template.render(context)
 
 # Save the generated document to a new file
-template.save("Employee_Report.docx")
+template.save("report_generated.docx")
